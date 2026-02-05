@@ -1,2 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lawrence Bedsheets</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial;
+  background: #fff;
+}
+
+header {
+  background: linear-gradient(135deg,#ff9a9e,#fad0c4);
+  color: white;
+  text-align: center;
+  padding: 60px 20px;
+}
+
+header a {
+  background: #25D366;
+  color: white;
+  padding: 14px 25px;
+  text-decoration: none;
+  border-radius: 8px;
+}
+
+.products {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 40px;
+}
+
+.product {
+  width: 260px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 15px;
+}
+
+.slider {
+  position: relative;
+}
+
+.slider img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.slider button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.5);
+  color: white;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+}
+
+.prev { left: 5px; }
+.next { right: 5px; }
+
+.buy {
+  background: #25D366;
+  color: white;
+  padding: 10px;
+  text-decoration: none;
+  display: block;
+  margin-top: 10px;
+  border-radius: 6px;
+  text-align: center;
+}
+
+.whatsapp-float {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #25D366;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.whatsapp-float img {
+  width: 35px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>Bebspreadgh</h1>
+<p>Affordable quality bedsheets in Ghana</p>
+
+<a href="https://wa.me/233598180870">
+Order on WhatsApp
+</a>
+
+</header>
+
+
+<div class="products">
+
+<!-- DOUBLE -->
+<div class="product">
+
+<div class="slider">
+
+<img id="doubleSlide" src="images/double1.jpg">
+
+<button class="prev" onclick="changeSlide('double',-1)">‹</button>
+<button class="next" onclick="changeSlide('double',1)">›</button>
+
+</div>
+
+<h3>Double Bedsheet</h3>
+<p>GH₵ 140</p>
+
+<a class="buy"
+href="https://wa.me/233598180870?text=I want Double Bedsheet">
+Buy on WhatsApp
+</a>
+
+</div>
+
+
+<!-- QUEEN -->
+<div class="product">
+
+<div class="slider">
+
+<img id="queenSlide" src="images/queen1.jpg">
+
+<button class="prev" onclick="changeSlide('queen',-1)">‹</button>
+<button class="next" onclick="changeSlide('queen',1)">›</button>
+
+</div>
+
+<h3>Queen Bedsheet</h3>
+<p>GH₵ 170</p>
+
+<a class="buy"
+href="https://wa.me/233598180870?text=I want Queen Bedsheet">
+Buy on WhatsApp
+</a>
+
+</div>
+
+
+<!-- KING -->
+<div class="product">
+
+<div class="slider">
+
+<img id="kingSlide" src="images/king1.jpg">
+
+<button class="prev" onclick="changeSlide('king',-1)">‹</button>
+<button class="next" onclick="changeSlide('king',1)">›</button>
+
+</div>
+
+<h3>King Bedsheet</h3>
+<p>GH₵ 170</p>
+
+<a class="buy"
+href="https://wa.me/233598180870?text=I want King Bedsheet">
+Buy on WhatsApp
+</a>
+
+</div>
+
+
+</div>
+
+
+<!-- FLOAT BUTTON -->
+
+<a href="https://wa.me/233598180870"
+class="whatsapp-float">
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg">
+
+</a>
+
+
+<script>
+
+const slides = {
+
+double: ["images/double1.jpg","images/double2.jpg"],
+
+queen: ["images/queen1.jpg","images/queen2.jpg"],
+
+king: ["images/king1.jpg","images/king2.jpg"]
+
+};
+
+const index = { double:0, queen:0, king:0 };
+
+function changeSlide(type, step){
+
+index[type]+=step;
+
+if(index[type]<0)
+index[type]=slides[type].length-1;
+
+if(index[type]>=slides[type].length)
+index[type]=0;
+
+document.getElementById(type+"Slide").src =
+slides[type][index[type]];
+
+}
+
+</script>
+
+</body>
+</html>
 
 
