@@ -31,9 +31,6 @@ button, .btn {
 }
 .instagram { background: #E1306C; }
 .call { background: #1E90FF; }
-.share { background: #FF4500; }
-.location { background: #FFA500; }
-.top { background: #333; }
 .container { padding: 20px; max-width: 1000px; margin: auto; }
 .slideshow, .products { margin-bottom: 20px; }
 .slideshow img { width: 100%; border-radius: 10px; }
@@ -54,11 +51,6 @@ input[type="number"] { width: 60px; padding:5px; margin-top:5px; }
   border-radius: 50%; display: flex; justify-content: center; align-items: center; z-index: 1000;
 }
 .whatsapp-float img { width: 35px; }
-.back-top {
-  position: fixed; bottom: 100px; right: 20px; background: #333;
-  color: white; border-radius: 50%; padding: 12px; text-align: center;
-  font-size: 18px; cursor: pointer; z-index: 999;
-}
 </style>
 </head>
 <body>
@@ -66,11 +58,8 @@ input[type="number"] { width: 60px; padding:5px; margin-top:5px; }
 <header id="top">
 <h1>BedSpreadGh</h1>
 <p>Affordable Quality Bedsheets</p>
-<a class="btn" href="https://wa.me/233598180870">Order on WhatsApp</a>
 <a class="btn instagram" href="https://instagram.com/BedSpreadGh" target="_blank">Follow on Instagram</a>
 <a class="btn call" href="tel:+233598180870">Call Now</a>
-<a class="btn share" href="https://api.whatsapp.com/send?text=Check out BedSpreadGh! https://bedsheet-promo-v2.vercel.app" target="_blank">Share</a>
-<a class="btn location" href="https://goo.gl/maps/YOUR_LOCATION" target="_blank">Find Our Store</a>
 </header>
 
 <div class="container">
@@ -138,9 +127,6 @@ After payment click WhatsApp to confirm.
 <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg">
 </a>
 
-<!-- BACK TO TOP -->
-<div class="back-top" onclick="scrollToTop()">⬆</div>
-
 <script>
 /* SLIDESHOW */
 const images=[
@@ -189,9 +175,6 @@ function sendOrder(e){
 e.preventDefault();
 orderNow();
 }
-
-/* BACK TO TOP */
-function scrollToTop(){ window.scrollTo({top:0, behavior:'smooth'}); }
 </script>
 
 </body>
