@@ -174,6 +174,34 @@ function sendCartOrder() {
 
   window.open(`https://wa.me/233598180870?text=${message}`);
 }
+  <script>
+// Extra bedsheet images to load
+const moreImages = [
+  {name: "Floral Bedsheet", price: 150, src: "https://raw.githubusercontent.com/lawrenceamon-pixel/bedsheet-promo-app/main/images/Floral1.jpeg"},
+  {name: "Pastel Bedsheet", price: 130, src: "https://raw.githubusercontent.com/lawrenceamon-pixel/bedsheet-promo-app/main/images/Pastel1.jpeg"},
+  {name: "Printed Bedsheet", price: 160, src: "https://raw.githubusercontent.com/lawrenceamon-pixel/bedsheet-promo-app/main/images/Printed1.jpeg"}
+];
+
+document.getElementById("loadMoreBtn").addEventListener("click", () => {
+  const productsDiv = document.querySelector(".products");
+
+  moreImages.forEach((item, idx) => {
+    const card = document.createElement("div");
+    card.className = "product-card";
+
+    card.innerHTML = `
+      <img src="${item.src}">
+      <h3>${item.name} 🛏️</h3>
+      <p>GH₵${item.price} 💰</p>
+      Quantity: <input type="number" min="0" value="0" id="qtyExtra${idx}">
+    `;
+    productsDiv.appendChild(card);
+  });
+
+  // Disable button after loading more
+  document.getElementById("loadMoreBtn").disabled = true;
+});
+
 </script>
 
 </body>
