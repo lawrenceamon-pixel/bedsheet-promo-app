@@ -72,27 +72,31 @@ input[type="number"] { width: 60px; padding:5px; margin-top:5px; }
 
 <!-- PRODUCTS -->
 <div class="products">
-<div class="product-card">
-<img src="https://raw.githubusercontent.com/lawrenceamon-pixel/bedsheet-promo-app/main/images/King1.jpg">
-<h3>King Bedsheet</h3>
-<p>GH₵170</p>
-Quantity: <input type="number" min="0" value="0" id="qtyKing">
+  <div class="product-card">
+    <img src="https://raw.githubusercontent.com/lawrenceamon-pixel/bedsheet-promo-app/main/images/King1.jpg">
+    <h3>King Bedsheet</h3>
+    <p>GH₵170</p>
+    Quantity: <input type="number" min="0" value="0" id="qtyKing">
+    <button onclick="orderProduct('King Bedsheet', 'qtyKing', 170)">Order Now</button>
+  </div>
+
+  <div class="product-card">
+    <img src="https://raw.githubusercontent.com/lawrenceamon-pixel/bedsheet-promo-app/main/images/Queen1.jpeg">
+    <h3>Queen Bedsheet</h3>
+    <p>GH₵170</p>
+    Quantity: <input type="number" min="0" value="0" id="qtyQueen">
+    <button onclick="orderProduct('Queen Bedsheet', 'qtyQueen', 170)">Order Now</button>
+  </div>
+
+  <div class="product-card">
+    <img src="https://raw.githubusercontent.com/lawrenceamon-pixel/bedsheet-promo-app/refs/heads/main/images/Double2.jpeg">
+    <h3>Double Bedsheet</h3>
+    <p>GH₵140</p>
+    Quantity: <input type="number" min="0" value="0" id="qtyDouble">
+    <button onclick="orderProduct('Double Bedsheet', 'qtyDouble', 140)">Order Now</button>
+  </div>
 </div>
 
-<div class="product-card">
-<img src="https://raw.githubusercontent.com/lawrenceamon-pixel/bedsheet-promo-app/main/images/Queen1.jpeg">
-<h3>Queen Bedsheet</h3>
-<p>GH₵170</p>
-Quantity: <input type="number" min="0" value="0" id="qtyQueen">
-</div>
-
-<div class="product-card">
-<img src="https://raw.githubusercontent.com/lawrenceamon-pixel/bedsheet-promo-app/main/images/Double1.jpg">
-<h3>Double Bedsheet</h3>
-<p>GH₵140</p>
-Quantity: <input type="number" min="0" value="0" id="qtyDouble">
-</div>
-</div>
 
 <div class="total">Total: GH₵ <span id="total">0</span></div>
 <button onclick="updateTotal()">Update Total</button>
