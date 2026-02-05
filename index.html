@@ -115,10 +115,27 @@ Follow on Instagram
 
 <h3>Featured Bedsheets</h3>
 
-<img id="slide"
-<img src="https://raw.githubusercontent.com/lawrenceamon-pixel/bedsheet-promo-app/refs/heads/main/images/King1.jpg">
-<img scr="https://raw.githubusercontent.com/lawrenceamon-pixel/bedsheet-promo-app/refs/heads/main/images/Queen1.jpeg">
+<!-- SLIDESHOW -->
+<div class="product">
+<h3>Featured Bedsheets</h3>
+<img id="slide" src="https://raw.githubusercontent.com/lawrenceamon-pixel/bedsheet-promo-app/main/images/King1.jpg">
 </div>
+
+<script>
+/* AUTO SLIDESHOW */
+const images=[
+  "https://raw.githubusercontent.com/lawrenceamon-pixel/bedsheet-promo-app/main/images/King1.jpg",
+  "https://raw.githubusercontent.com/lawrenceamon-pixel/bedsheet-promo-app/main/images/Queen1.jpeg",
+  "https://raw.githubusercontent.com/lawrenceamon-pixel/bedsheet-promo-app/main/images/Double1.jpg"
+];
+
+let i=0;
+setInterval(()=>{
+  i++;
+  if(i>=images.length) i=0;
+  document.getElementById("slide").src=images[i];
+},3000);
+</script>
 
 
 <!-- PRODUCTS -->
