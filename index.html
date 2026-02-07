@@ -219,7 +219,6 @@ function openPaystackPopup(){
   let totalAmount = parseFloat(document.getElementById("total").innerText) || 0;
   if(totalAmount <= 0){ alert("Please select items first"); return; }
 
-  let customerPhone = prompt("Enter your mobile number for payment (e.g., 233XXXXXXXXX):");
   if(!customerPhone){ alert("Phone number is required"); return; }
 
   let handler = PaystackPop.setup({
