@@ -91,6 +91,7 @@ button:hover, .btn:hover { transform: translateY(-2px); }
 
 .whatsapp-float img { width: 35px; }
 
+/* Floating total bar */
 .total-bar {
   position: fixed;
   bottom: 0;
@@ -108,19 +109,16 @@ button:hover, .btn:hover { transform: translateY(-2px); }
 
 .total-bar button { margin: 0 0 0 10px; }
 
-/* Floating payment buttons */
+/* Inline payment buttons below products */
 #payment-buttons {
-  position: fixed;
-  bottom: 100px;
-  right: 20px;
+  margin-top: 20px;
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   gap: 10px;
-  z-index: 1000;
 }
 #payment-buttons button, #payment-buttons a {
-  padding: 8px 12px;
-  font-size: 14px;
+  padding: 10px 15px;
+  font-size: 16px;
 }
 </style>
 </head>
@@ -172,9 +170,16 @@ Quantity: <input type="number" id="qtyDouble" value="0">
 MoMo Number:<br>233530467047<br><br>
 Name:<br>iambojarmedia enterprise
 </p>
+
+<!-- INLINE PAYMENT BUTTONS -->
+<div id="payment-buttons">
+<button onclick="openPaystackPopup()">Pay with Mobile Money</button>
+<a href="https://wa.me/233598180870" class="btn">Confirm Payment</a>
 </div>
 
-<!-- FLOAT BUTTONS -->
+</div>
+
+<!-- FLOAT BUTTON -->
 <a href="https://wa.me/233598180870" class="whatsapp-float">
 <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg">
 </a>
@@ -186,12 +191,6 @@ Name:<br>iambojarmedia enterprise
 <button onclick="updateTotal()">Update Total</button>
 <button onclick="sendOrder()">Send Order</button>
 </div>
-</div>
-
-<!-- FLOATING PAYMENT BUTTONS -->
-<div id="payment-buttons">
-<button onclick="openPaystackPopup()">Pay with Mobile Money</button>
-<a href="https://wa.me/233598180870">Confirm Payment</a>
 </div>
 
 <!-- PAYSTACK -->
@@ -248,3 +247,4 @@ function openPaystackPopup(){
 </script>
 </body>
 </html>
+
