@@ -44,7 +44,12 @@ button, .btn {
   width: 100%;
   border-radius: 15px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-  transition: opacity 1s;
+  opacity: 1;
+  transition: opacity 1s ease-in-out;
+}
+
+.fade-out {
+  opacity: 0;
 }
 
 .products {
@@ -72,12 +77,6 @@ button, .btn {
   border-radius: 15px;
 }
 
-.total {
-  font-weight: bold;
-  margin-top: 15px;
-  font-size: 20px;
-}
-
 .whatsapp-float {
   position: fixed;
   bottom: 20px;
@@ -89,10 +88,31 @@ button, .btn {
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1000;
 }
 
 .whatsapp-float img {
   width: 35px;
+}
+
+/* Floating total bar */
+.total-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #fff;
+  border-top: 2px solid #25D366;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 -4px 8px rgba(0,0,0,0.1);
+  z-index: 999;
+}
+
+.total-bar button {
+  margin: 0 0 0 10px;
 }
 </style>
 </head>
@@ -123,7 +143,7 @@ Call Now
 <h3>Featured Bedsheets</h3>
 
 <img id="slide"
-src="images/king-bedsheet.jpg">
+src="images/photo1.jpg">
 
 </div>
 
@@ -132,8 +152,7 @@ src="images/king-bedsheet.jpg">
 
 <div class="product-card">
 
-<!-- KING IMAGE REPLACED ONLY HERE -->
-<img src="images/king-bedsheet.jpg">
+<img src="images/photo1.jpg">
 
 <h3>King Bedsheet</h3>
 
@@ -172,29 +191,19 @@ Quantity:
 
 </div>
 
-<!-- TOTAL -->
-<div class="total">
-Total: GH₵ <span id="total">0</span>
-</div>
-
-<button onclick="updateTotal()">
-Update Total
-</button>
-
-<button onclick="sendOrder()">
-Send Order via WhatsApp
-</button>
-
 <!-- PAYMENT -->
 <h3>Mobile Money Payment</h3>
 
 <p>
 MoMo Number:<br>
 233530467047<br><br>
-
 Name:<br>
 iambojarmedia enterprise
 </p>
+
+<a class="btn" onclick="openPaystackPopup()">
+Pay with Mobile Money
+</a>
 
 <a class="btn"
 href="https://wa.me/233598180870">
@@ -211,22 +220,28 @@ class="whatsapp-float">
 
 </a>
 
+<!-- FLOAT TOTAL BAR -->
+<div class="total-bar">
+<div>Total: GH₵ <span id="total">0</span></div>
+<div>
+<button onclick="updateTotal()">Update Total</button>
+<button onclick="sendOrder()">Send Order</button>
+</div>
+</div>
+
+<!-- PAYSTACK -->
+<script src="https://js.paystack.co/v1/inline.js"></script>
+
 <script>
 
 //// SLIDESHOW IMAGES
 
 const images = [
-
-"images/king-bedsheet.jpg",
-
+"images/photo1.jpg",
 "images/photo2.jpg",
-
 "images/photo3.jpg",
-
 "images/photo4.jpg",
-
 "images/photo5.jpg"
-
 ];
 
 let i = 0;
@@ -235,7 +250,7 @@ setInterval(function(){
 
 let slide = document.getElementById("slide");
 
-slide.style.opacity = 0;
+slide.classList.add("fade-out");
 
 setTimeout(function(){
 
@@ -247,62 +262,36 @@ i = 0;
 
 slide.src = images[i];
 
-slide.style.opacity = 1;
+slide.classList.remove("fade-out");
 
 },500);
 
 },3000);
 
-
-
 //// TOTAL
 
 function updateTotal(){
 
-let king =
-parseInt(document.getElementById("qtyKing").value) || 0;
-
-let queen =
-parseInt(document.getElementById("qtyQueen").value) || 0;
-
-let double =
-parseInt(document.getElementById("qtyDouble").value) || 0;
-
-let total =
-king*170 +
-queen*170 +
-double*140;
-
+let king = parseInt(document.getElementById("qtyKing").value) || 0;
+let queen = parseInt(document.getElementById("qtyQueen").value) || 0;
+let double = parseInt(document.getElementById("qtyDouble").value) || 0;
+let total = king*170 + queen*170 + double*140;
 document.getElementById("total").innerText = total;
 
 }
-
-
 
 //// SEND ORDER
 
 function sendOrder(){
 
-let king =
-parseInt(document.getElementById("qtyKing").value) || 0;
-
-let queen =
-parseInt(document.getElementById("qtyQueen").value) || 0;
-
-let double =
-parseInt(document.getElementById("qtyDouble").value) || 0;
-
-let total =
-king*170 +
-queen*170 +
-double*140;
+let king = parseInt(document.getElementById("qtyKing").value) || 0;
+let queen = parseInt(document.getElementById("qtyQueen").value) || 0;
+let double = parseInt(document.getElementById("qtyDouble").value) || 0;
+let total = king*170 + queen*170 + double*140;
 
 if(total === 0){
-
 alert("Select quantity first");
-
 return;
-
 }
 
 let msg =
@@ -312,12 +301,39 @@ let msg =
 "Double: " + double + "%0A" +
 "Total: GH₵" + total;
 
-window.open(
-"https://wa.me/233598180870?text=" + msg
-);
+window.open("https://wa.me/233598180870?text=" + msg);
 
 }
 
+//// PAYSTACK POPUP
+
+function openPaystackPopup(){
+
+let totalAmount = parseFloat(document.getElementById("total").innerText) || 0;
+
+if(totalAmount <= 0){
+alert("Please select items first");
+return;
+}
+
+let handler = PaystackPop.setup({
+key: "pk_test_3325b55720129b42a3f952a55e81a4049882265a",
+email: "customer@email.com",
+amount: totalAmount * 100,
+currency: "GHS",
+ref: "BedSpreadGh_" + Date.now(),
+callback: function(response){
+alert("Payment successful!");
+sendOrder();
+},
+onClose: function(){
+console.log("Payment closed");
+}
+});
+
+handler.openIframe();
+
+}
 </script>
 
 </body>
