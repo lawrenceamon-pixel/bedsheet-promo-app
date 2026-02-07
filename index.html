@@ -6,76 +6,36 @@
 <title>BedSpreadGh</title>
 
 <style>
-body {
-  font-family: Arial;
-  margin: 0;
-  background: #f4f4f4;
-}
-
-header {
-  background: linear-gradient(135deg,#ff9a9e,#fad0c4);
-  color: white;
-  text-align: center;
-  padding: 30px 20px;
-}
-
-button, .btn {
-  background: #25D366;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 8px;
-  text-decoration: none;
-  display: inline-block;
-  margin: 5px 3px;
+body { font-family: Arial; margin: 0; background: #f4f4f4; }
+header { background: linear-gradient(135deg,#ff9a9e,#fad0c4); color: white; text-align: center; padding: 30px 20px; }
+button, .btn { 
+  background: #25D366; color: white; border: none; padding: 10px 15px; 
+  border-radius: 8px; text-decoration: none; display: inline-block; margin: 5px 3px; 
   cursor: pointer;
 }
-
 .instagram { background: #E1306C; }
 .call { background: #1E90FF; }
-
-.container {
-  padding: 20px;
-  max-width: 1000px;
-  margin: auto;
-}
-
-.slideshow img {
-  width: 100%;
-  border-radius: 15px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-  transition: opacity 1s;
-}
-
-.products {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 20px;
-}
-
-@media(min-width:600px){
-  .products {
-    grid-template-columns: repeat(3,1fr);
-  }
-}
+.container { padding: 20px; max-width: 1000px; margin: auto; }
+.slideshow img { width: 100%; border-radius: 15px; }
+.products { display: grid; grid-template-columns: 1fr; gap: 20px; }
+@media(min-width:600px){ .products { grid-template-columns: repeat(3,1fr); } }
 
 .product-card {
   background: white;
   padding: 15px;
   border-radius: 15px;
   text-align: center;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
 .product-card img {
   width: 100%;
-  border-radius: 15px;
+  border-radius: 10px;
 }
 
 .total {
   font-weight: bold;
-  margin-top: 15px;
   font-size: 20px;
+  margin-top: 10px;
 }
 
 .whatsapp-float {
@@ -94,6 +54,14 @@ button, .btn {
 .whatsapp-float img {
   width: 35px;
 }
+
+/* Load more gallery */
+#gallery img{
+  width:100%;
+  margin-top:15px;
+  border-radius:10px;
+}
+
 </style>
 </head>
 <body>
@@ -102,20 +70,19 @@ button, .btn {
 <h1>BedSpreadGh</h1>
 <p>Affordable Quality Bedsheets</p>
 
-<a class="btn instagram"
-href="https://instagram.com/BedSpreadGh"
-target="_blank">
+<a class="btn instagram" href="https://instagram.com/BedSpreadGh" target="_blank">
 Follow on Instagram
 </a>
 
-<a class="btn call"
-href="tel:+233598180870">
+<a class="btn call" href="tel:+233598180870">
 Call Now
 </a>
 
 </header>
 
+
 <div class="container">
+
 
 <!-- SLIDESHOW -->
 <div class="slideshow">
@@ -127,62 +94,62 @@ src="https://raw.githubusercontent.com/lawrenceamon-pixel/bedsheet-promo-app/mai
 
 </div>
 
+
+<!-- LOAD MORE GALLERY -->
+<div id="gallery"></div>
+
+<button onclick="loadMore()" class="btn">
+Load More Images
+</button>
+
+
+
 <!-- PRODUCTS -->
 <div class="products">
 
 <div class="product-card">
-
 <img src="https://raw.githubusercontent.com/lawrenceamon-pixel/bedsheet-promo-app/main/images/King1.jpg">
-
-<h3>King Bedsheet</h3>
-
+<h3>King Bedsheet 🛏️</h3>
 <p>GH₵170</p>
-
 Quantity:
 <input type="number" id="qtyKing" value="0">
-
 </div>
 
+
 <div class="product-card">
-
 <img src="https://raw.githubusercontent.com/lawrenceamon-pixel/bedsheet-promo-app/main/images/Queen1.jpeg">
-
-<h3>Queen Bedsheet</h3>
-
+<h3>Queen Bedsheet 🛏️</h3>
 <p>GH₵170</p>
-
 Quantity:
 <input type="number" id="qtyQueen" value="0">
-
 </div>
+
 
 <div class="product-card">
-
 <img src="https://raw.githubusercontent.com/lawrenceamon-pixel/bedsheet-promo-app/main/images/Double2.jpeg">
-
-<h3>Double Bedsheet</h3>
-
+<h3>Double Bedsheet 🛏️</h3>
 <p>GH₵140</p>
-
 Quantity:
 <input type="number" id="qtyDouble" value="0">
+</div>
+
 
 </div>
 
-</div>
+
 
 <!-- TOTAL -->
 <div class="total">
 Total: GH₵ <span id="total">0</span>
 </div>
 
-<button onclick="updateTotal()">
-Update Total
+<button onclick="updateTotal()">Update Total</button>
+
+<button onclick="sendCartOrder()">
+Send All Orders via WhatsApp
 </button>
 
-<button onclick="sendOrder()">
-Send Order via WhatsApp
-</button>
+
 
 <!-- PAYMENT -->
 <h3>Mobile Money Payment</h3>
@@ -202,7 +169,10 @@ href="https://wa.me/233598180870">
 Confirm Payment
 </a>
 
+
 </div>
+
+
 
 <!-- FLOAT BUTTON -->
 <a href="https://wa.me/233598180870"
@@ -212,11 +182,13 @@ class="whatsapp-float">
 
 </a>
 
+
+
 <script>
 
-//// SLIDESHOW IMAGES
 
-const images = [
+/* ALL IMAGES */
+const allImages = [
 
 "https://raw.githubusercontent.com/lawrenceamon-pixel/bedsheet-promo-app/main/images/King1.jpg",
 
@@ -224,79 +196,91 @@ const images = [
 
 "https://raw.githubusercontent.com/lawrenceamon-pixel/bedsheet-promo-app/main/images/Double2.jpeg",
 
-"https://raw.githubusercontent.com/lawrenceamon-pixel/bedsheet-promo-app/main/images/WhatsApp%20Image%202026-02-05%20at%2006.37.28.jpeg",
+"https://raw.githubusercontent.com/lawrenceamon-pixel/bedsheet-promo-app/main/images/photo1.jpg",
 
-"https://raw.githubusercontent.com/lawrenceamon-pixel/bedsheet-promo-app/main/images/WhatsApp%20Image%202026-02-05%20at%2006.37.29%20(2).jpeg",
+"https://raw.githubusercontent.com/lawrenceamon-pixel/bedsheet-promo-app/main/images/photo2.jpg",
 
-"https://raw.githubusercontent.com/lawrenceamon-pixel/bedsheet-promo-app/main/images/WhatsApp%20Image%202026-02-05%20at%2006.37.31%20(2).jpeg",
+"https://raw.githubusercontent.com/lawrenceamon-pixel/bedsheet-promo-app/main/images/photo3.jpg",
 
-"https://raw.githubusercontent.com/lawrenceamon-pixel/bedsheet-promo-app/main/images/WhatsApp%20Image%202026-02-05%20at%2006.37.32.jpeg",
+"https://raw.githubusercontent.com/lawrenceamon-pixel/bedsheet-promo-app/main/images/photo4.jpg",
 
-"https://raw.githubusercontent.com/lawrenceamon-pixel/bedsheet-promo-app/main/images/WhatsApp%20Image%202026-02-05%20at%2006.37.34.jpeg"
+"https://raw.githubusercontent.com/lawrenceamon-pixel/bedsheet-promo-app/main/images/photo5.jpg"
 
 ];
 
-let i = 0;
+
+
+/* SLIDESHOW */
+let slideIndex = 0;
 
 setInterval(function(){
 
-i++;
+slideIndex++;
 
-if(i >= images.length){
+if(slideIndex >= allImages.length){
 
-i = 0;
+slideIndex = 0;
 
 }
 
-document.getElementById("slide").src = images[i];
+document.getElementById("slide").src = allImages[slideIndex];
 
 },3000);
 
 
 
-//// TOTAL
 
-function updateTotal(){
+/* LOAD MORE */
+let visible = 0;
 
-let king =
-parseInt(document.getElementById("qtyKing").value) || 0;
+function loadMore(){
 
-let queen =
-parseInt(document.getElementById("qtyQueen").value) || 0;
+if(visible >= allImages.length){
 
-let double =
-parseInt(document.getElementById("qtyDouble").value) || 0;
+alert("No more images");
 
-let total =
-king*170 +
-queen*170 +
-double*140;
+return;
 
-document.getElementById("total").innerText = total;
+}
+
+let img = document.createElement("img");
+
+img.src = allImages[visible];
+
+document.getElementById("gallery").appendChild(img);
+
+visible++;
 
 }
 
 
 
-//// SEND ORDER
 
-function sendOrder(){
+/* TOTAL */
+function updateTotal(){
 
-let king =
-parseInt(document.getElementById("qtyKing").value) || 0;
+let king = document.getElementById('qtyKing').value || 0;
+let queen = document.getElementById('qtyQueen').value || 0;
+let dbl = document.getElementById('qtyDouble').value || 0;
 
-let queen =
-parseInt(document.getElementById("qtyQueen").value) || 0;
+let total = king*170 + queen*170 + dbl*140;
 
-let double =
-parseInt(document.getElementById("qtyDouble").value) || 0;
+document.getElementById('total').innerText = total;
 
-let total =
-king*170 +
-queen*170 +
-double*140;
+}
 
-if(total === 0){
+
+
+/* SEND ORDER */
+function sendCartOrder(){
+
+let king = document.getElementById('qtyKing').value || 0;
+let queen = document.getElementById('qtyQueen').value || 0;
+let dbl = document.getElementById('qtyDouble').value || 0;
+
+let total = king*170 + queen*170 + dbl*140;
+
+if(total==0){
 
 alert("Select quantity first");
 
@@ -304,25 +288,23 @@ return;
 
 }
 
-let msg =
-"New Order:%0A" +
+let msg = "New Order:%0A";
 
-"King: " + king + "%0A" +
+if(king>0) msg+="King: "+king+"%0A";
 
-"Queen: " + queen + "%0A" +
+if(queen>0) msg+="Queen: "+queen+"%0A";
 
-"Double: " + double + "%0A" +
+if(dbl>0) msg+="Double: "+dbl+"%0A";
 
-"Total: GH₵" + total;
+msg+="Total: GH₵"+total;
 
-window.open(
-"https://wa.me/233598180870?text=" + msg
-);
+window.open("https://wa.me/233598180870?text="+msg);
 
 }
 
+
 </script>
+
 
 </body>
 </html>
-
