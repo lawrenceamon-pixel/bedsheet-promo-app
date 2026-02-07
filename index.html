@@ -14,6 +14,7 @@ body{
 font-family: Arial;
 margin:0;
 background:#f4f4f4;
+padding-bottom:160px; /* prevents cart covering page */
 }
 
 header{
@@ -46,26 +47,35 @@ button{
 background:#000;
 color:#fff;
 border:none;
-padding:10px;
+padding:12px;
 margin-top:10px;
 width:100%;
 border-radius:5px;
 font-size:16px;
+cursor:pointer;
 }
 
 input{
 width:100%;
-padding:10px;
+padding:12px;
 margin-top:10px;
+border-radius:5px;
+border:1px solid #ccc;
 }
 
 .cart{
 position:fixed;
 bottom:0;
+left:0;
+right:0;
 background:#fff;
-width:100%;
 padding:15px;
 box-shadow:0 -2px 10px rgba(0,0,0,0.2);
+border-top:3px solid #000;
+}
+
+.cart h3{
+margin:0 0 10px 0;
 }
 
 </style>
@@ -76,10 +86,10 @@ box-shadow:0 -2px 10px rgba(0,0,0,0.2);
 Bedspread Promo GH
 </header>
 
-<!-- KING -->
+<!-- KING SIZE -->
 <div class="section">
 
-<h3>King Size — GH₵350</h3>
+<h3>King Size</h3>
 
 <div class="slideshow">
 
@@ -92,15 +102,16 @@ Bedspread Promo GH
 </div>
 
 <button onclick="addToCart('King Size',350)">
-Add to Cart
+Add King Size – GH₵350
 </button>
 
 </div>
 
-<!-- QUEEN -->
+
+<!-- QUEEN SIZE -->
 <div class="section">
 
-<h3>Queen Size — GH₵300</h3>
+<h3>Queen Size</h3>
 
 <div class="slideshow">
 
@@ -111,15 +122,16 @@ Add to Cart
 </div>
 
 <button onclick="addToCart('Queen Size',300)">
-Add to Cart
+Add Queen Size – GH₵300
 </button>
 
 </div>
 
-<!-- DOUBLE -->
+
+<!-- DOUBLE SIZE -->
 <div class="section">
 
-<h3>Double Size — GH₵250</h3>
+<h3>Double Size</h3>
 
 <div class="slideshow">
 
@@ -130,142 +142,136 @@ Add to Cart
 </div>
 
 <button onclick="addToCart('Double Size',250)">
-Add to Cart
+Add Double Size – GH₵250
 </button>
 
 </div>
 
 
-<!-- CART -->
+
+<!-- CART SECTION -->
 <div class="cart">
 
-<h3>Cart Total: GH₵ <span id="total">0</span></h3>
+<h3>
+Cart Total: GH₵ <span id="total">0</span>
+</h3>
 
 <input id="customerName" placeholder="Your Name">
 
 <input id="customerPhone" placeholder="Phone Number">
 
 <button onclick="checkoutWhatsApp()">
-Checkout WhatsApp
+Order via WhatsApp
 </button>
 
 <button onclick="payNow()">
-Pay Now Online
+Pay with Mobile Money / Card
 </button>
 
 </div>
 
 
+
 <script>
 
-/* SLIDESHOW */
+/* SLIDESHOW FIX */
 
-let slides=document.querySelectorAll(".slideshow");
+document.querySelectorAll(".slideshow").forEach(function(slideshow){
 
-slides.forEach(function(slide){
+let images = slideshow.querySelectorAll("img");
 
-let images=slide.querySelectorAll("img");
+if(images.length === 0) return;
 
-let index=0;
+let index = 0;
 
-images[0].style.display="block";
+images[index].style.display = "block";
 
 setInterval(function(){
 
-images[index].style.display="none";
+images[index].style.display = "none";
 
-index=(index+1)%images.length;
+index = (index + 1) % images.length;
 
-images[index].style.display="block";
+images[index].style.display = "block";
 
 },3000);
 
 });
 
 
-/* CART */
+/* CART SYSTEM */
 
-let total=0;
+let total = 0;
+let cart = [];
 
-let cart=[];
+function addToCart(name, price){
 
-function addToCart(name,price){
+cart.push(name + " GH₵" + price);
 
-cart.push(name+" GH₵"+price);
+total += price;
 
-total+=price;
+document.getElementById("total").innerText = total;
 
-document.getElementById("total").innerText=total;
-
-alert(name+" added to cart");
+alert(name + " added to cart");
 
 }
 
 
-/* WHATSAPP CHECKOUT */
+/* WHATSAPP ORDER */
 
 function checkoutWhatsApp(){
 
-let name=document.getElementById("customerName").value;
+let name = document.getElementById("customerName").value;
+let phone = document.getElementById("customerPhone").value;
 
-let phone=document.getElementById("customerPhone").value;
-
-if(cart.length==0){
+if(cart.length == 0){
 
 alert("Cart is empty");
-
 return;
 
 }
 
-let message="Order:%0A";
+let message = "New Order:%0A";
 
 cart.forEach(function(item){
 
-message+=item+"%0A";
+message += item + "%0A";
 
 });
 
-message+="Total: GH₵"+total+"%0A";
+message += "Total: GH₵" + total + "%0A";
+message += "Name: " + name + "%0A";
+message += "Phone: " + phone;
 
-message+="Name: "+name+"%0A";
-
-message+="Phone: "+phone;
-
-window.open("https://wa.me/233598180870?text="+message);
+window.open("https://wa.me/233598180870?text=" + message);
 
 }
 
 
-/* PAYSTACK PAYMENT */
+/* PAYSTACK */
 
 function payNow(){
 
-let name=document.getElementById("customerName").value;
+let phone = document.getElementById("customerPhone").value;
 
-let phone=document.getElementById("customerPhone").value;
-
-let email=phone+"@bedspreadgh.com";
-
-if(total<=0){
+if(total <= 0){
 
 alert("Cart empty");
-
 return;
 
 }
 
 let handler = PaystackPop.setup({
 
-key: 'pk_test_3325b55720129b42a3f952a55e81a4049882265a',
+key: "pk_test_replace_with_your_real_key",
 
-email: email,
+email: phone + "@bedspreadgh.com",
 
 amount: total * 100,
 
 currency: "GHS",
 
-ref: "BED"+Math.floor(Math.random()*1000000000),
+ref: "BED" + Math.floor(Math.random()*1000000000),
 
 callback: function(response){
 
