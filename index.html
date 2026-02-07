@@ -3,325 +3,219 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BedSpreadGh</title>
+<title>Bedsheet Store</title>
 
 <style>
-body {
-  font-family: Arial;
-  margin: 0;
-  background: #f4f4f4;
+body{
+font-family:Arial;
+margin:0;
+padding:0;
+background:#f4f4f4;
 }
 
-header {
-  background: linear-gradient(135deg,#ff9a9e,#fad0c4);
-  color: white;
-  text-align: center;
-  padding: 30px 20px;
+/* SLIDESHOW */
+.slideshow-container{
+width:100%;
+max-height:500px;
+overflow:hidden;
+position:relative;
 }
 
-button, .btn {
-  background: #25D366;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 8px;
-  text-decoration: none;
-  display: inline-block;
-  margin: 5px 3px;
-  cursor: pointer;
+.slide{
+position:absolute;
+width:100%;
+height:500px;
+opacity:0;
+transition:opacity 1s ease-in-out;
 }
 
-.instagram { background: #E1306C; }
-.call { background: #1E90FF; }
-
-.container {
-  padding: 20px;
-  max-width: 1000px;
-  margin: auto;
+.slide.active{
+opacity:1;
 }
 
-/* SLIDESHOW WITH SMOOTH FADE */
-.slideshow img {
-  width: 100%;
-  border-radius: 15px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-  opacity: 1;
-  transition: opacity 1s ease-in-out;
+.slide img{
+width:100%;
+height:100%;
+object-fit:cover;
 }
 
-.products {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 20px;
+/* PRODUCTS */
+.products{
+display:flex;
+flex-wrap:wrap;
+gap:20px;
+padding:20px;
 }
 
-@media(min-width:600px){
-  .products {
-    grid-template-columns: repeat(3,1fr);
-  }
+.product{
+background:white;
+padding:15px;
+border-radius:10px;
+width:250px;
+box-shadow:0 0 10px rgba(0,0,0,0.1);
 }
 
-.product-card {
-  background: white;
-  padding: 15px;
-  border-radius: 15px;
-  text-align: center;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+.product img{
+width:100%;
+border-radius:10px;
 }
 
-.product-card img {
-  width: 100%;
-  border-radius: 15px;
+button{
+background:black;
+color:white;
+border:none;
+padding:10px;
+margin-top:10px;
+cursor:pointer;
 }
 
-.total {
-  font-weight: bold;
-  margin-top: 15px;
-  font-size: 20px;
+/* CART */
+.cart{
+position:fixed;
+right:0;
+top:0;
+background:white;
+width:300px;
+height:100%;
+box-shadow:-3px 0 10px rgba(0,0,0,0.2);
+padding:20px;
+overflow-y:auto;
 }
 
-.whatsapp-float {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: #25D366;
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.checkout-form{
+margin-top:20px;
 }
 
-.whatsapp-float img {
-  width: 35px;
+input{
+width:100%;
+padding:10px;
+margin:5px 0;
 }
+
 </style>
 </head>
 <body>
 
-<header>
-<h1>BedSpreadGh</h1>
-<p>Affordable Quality Bedsheets</p>
-
-<a class="btn instagram"
-href="https://instagram.com/BedSpreadGh"
-target="_blank">
-Follow on Instagram
-</a>
-
-<a class="btn call"
-href="tel:+233598180870">
-Call Now
-</a>
-
-</header>
-
-<div class="container">
-
 <!-- SLIDESHOW -->
-<div class="slideshow">
+<div class="slideshow-container">
 
-<h3>Featured Bedsheets</h3>
+<div class="slide active">
+<img src="images/photo1.jpg">
+</div>
 
-<img id="slide"
-src="images/photo1.jpg">
+<div class="slide">
+<img src="images/photo2.jpg">
+</div>
+
+<div class="slide">
+<img src="images/photo3.jpg">
+</div>
+
+<div class="slide">
+<img src="images/photo4.jpg">
+</div>
+
+<div class="slide">
+<img src="images/photo5.jpg">
+</div>
 
 </div>
+
 
 <!-- PRODUCTS -->
 <div class="products">
 
-<div class="product-card">
-
-<img src="images/photo1.jpg">
-
+<div class="product">
+<img src="images/king-bedsheet.jpg" alt="King Bedsheet">
 <h3>King Bedsheet</h3>
-
-<p>GH₵170</p>
-
-Quantity:
-<input type="number" id="qtyKing" value="0">
+<p>$50</p>
+<button onclick="addToCart('King Bedsheet',50)">Add to cart</button>
+</div>
 
 </div>
 
-<div class="product-card">
 
-<img src="images/photo2.jpg">
+<!-- CART -->
+<div class="cart">
+<h2>Cart</h2>
+<div id="cart-items"></div>
+<h3>Total: $<span id="cart-total">0</span></h3>
 
-<h3>Queen Bedsheet</h3>
+<div class="checkout-form">
+<h3>Checkout</h3>
 
-<p>GH₵170</p>
+<input type="text" id="name" placeholder="Name">
+<input type="text" id="address" placeholder="Address">
+<input type="email" id="email" placeholder="Email">
 
-Quantity:
-<input type="number" id="qtyQueen" value="0">
-
-</div>
-
-<div class="product-card">
-
-<img src="images/photo3.jpg">
-
-<h3>Double Bedsheet</h3>
-
-<p>GH₵140</p>
-
-Quantity:
-<input type="number" id="qtyDouble" value="0">
+<button onclick="checkout()">Pay Now</button>
 
 </div>
 
 </div>
 
-<!-- TOTAL -->
-<div class="total">
-Total: GH₵ <span id="total">0</span>
-</div>
-
-<button onclick="updateTotal()">
-Update Total
-</button>
-
-<button onclick="sendOrder()">
-Send Order via WhatsApp
-</button>
-
-<!-- PAYMENT -->
-<h3>Mobile Money Payment</h3>
-
-<p>
-MoMo Number:<br>
-233530467047<br><br>
-
-Name:<br>
-iambojarmedia enterprise
-</p>
-
-<a class="btn"
-href="https://wa.me/233598180870">
-Confirm Payment
-</a>
-
-</div>
-
-<!-- FLOAT BUTTON -->
-<a href="https://wa.me/233598180870"
-class="whatsapp-float">
-
-<img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg">
-
-</a>
 
 <script>
 
-//// SLIDESHOW IMAGES
+/* SLIDESHOW FADE */
+let slideIndex=0;
+const slides=document.querySelectorAll(".slide");
 
-const images = [
+setInterval(()=>{
+slides[slideIndex].classList.remove("active");
 
-"images/photo1.jpg",
+slideIndex=(slideIndex+1)%slides.length;
 
-"images/photo2.jpg",
-
-"images/photo3.jpg",
-
-"images/photo4.jpg",
-
-"images/photo5.jpg"
-
-];
-
-let i = 0;
-
-const slide = document.getElementById("slide");
-
-setInterval(function(){
-
-slide.style.opacity = 0;
-
-setTimeout(function(){
-
-i++;
-
-if(i >= images.length){
-
-i = 0;
-
-}
-
-slide.src = images[i];
-
-slide.style.opacity = 1;
-
-},500);
+slides[slideIndex].classList.add("active");
 
 },3000);
 
 
+/* CART SYSTEM */
+let cart=[];
+let total=0;
 
-//// TOTAL
+function addToCart(name,price){
 
-function updateTotal(){
+cart.push({name,price});
 
-let king =
-parseInt(document.getElementById("qtyKing").value) || 0;
+total+=price;
 
-let queen =
-parseInt(document.getElementById("qtyQueen").value) || 0;
+renderCart();
 
-let double =
-parseInt(document.getElementById("qtyDouble").value) || 0;
+}
 
-let total =
-king*170 +
-queen*170 +
-double*140;
+function renderCart(){
 
-document.getElementById("total").innerText = total;
+const cartItems=document.getElementById("cart-items");
+
+cartItems.innerHTML="";
+
+cart.forEach(item=>{
+
+cartItems.innerHTML+=`<p>${item.name} - $${item.price}</p>`;
+
+});
+
+document.getElementById("cart-total").innerText=total;
 
 }
 
 
+/* CHECKOUT */
+function checkout(){
 
-//// SEND ORDER
+const name=document.getElementById("name").value;
 
-function sendOrder(){
+if(!name){
 
-let king =
-parseInt(document.getElementById("qtyKing").value) || 0;
-
-let queen =
-parseInt(document.getElementById("qtyQueen").value) || 0;
-
-let double =
-parseInt(document.getElementById("qtyDouble").value) || 0;
-
-let total =
-king*170 +
-queen*170 +
-double*140;
-
-if(total === 0){
-
-alert("Select quantity first");
+alert("Enter name");
 
 return;
 
 }
 
-let msg =
-"New Order:%0A" +
-
-"King: " + king + "%0A" +
-
-"Queen: " + queen + "%0A" +
-
-"Double: " + double + "%0A" +
-
-"Total: GH₵" + total;
-
-window.open(
-"https://wa.me/233598180870?text=" + msg
-);
+alert("Redirecting to payment");
 
 }
 
