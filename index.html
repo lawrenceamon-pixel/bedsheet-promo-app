@@ -12,14 +12,7 @@ body {
   background: #f4f4f4;
 }
 
-/* Prevent content being hidden behind total bar */
-.container {
-  padding: 20px;
-  max-width: 1000px;
-  margin: auto;
-  padding-bottom: 120px;
-}
-
+/* HEADER */
 header {
   background: linear-gradient(135deg,#ff9a9e,#fad0c4);
   color: white;
@@ -27,6 +20,7 @@ header {
   padding: 30px 20px;
 }
 
+/* BUTTONS */
 button, .btn {
   background: #25D366;
   color: white;
@@ -35,18 +29,23 @@ button, .btn {
   border-radius: 8px;
   text-decoration: none;
   display: inline-block;
-  margin: 5px 3px;
+  margin: 5px;
   cursor: pointer;
   font-size: 16px;
-}
-
-button:hover, .btn:hover {
-  opacity: 0.9;
 }
 
 .instagram { background: #E1306C; }
 .call { background: #1E90FF; }
 
+/* CONTAINER */
+.container {
+  padding: 20px;
+  max-width: 1000px;
+  margin: auto;
+  padding-bottom: 140px;
+}
+
+/* SLIDESHOW */
 .slideshow img {
   width: 100%;
   border-radius: 15px;
@@ -59,6 +58,7 @@ button:hover, .btn:hover {
   opacity: 0;
 }
 
+/* PRODUCTS */
 .products {
   display: grid;
   grid-template-columns: 1fr;
@@ -84,16 +84,19 @@ button:hover, .btn:hover {
   border-radius: 15px;
 }
 
-/* Inline payment buttons */
+/* PAYMENT BUTTONS INLINE */
 #payment-buttons {
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin-top: 25px;
+  margin-bottom: 40px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
-/* Floating WhatsApp */
+/* FLOAT WHATSAPP */
 .whatsapp-float {
   position: fixed;
-  bottom: 90px;
+  bottom: 80px;
   right: 20px;
   background: #25D366;
   width: 60px;
@@ -108,7 +111,7 @@ button:hover, .btn:hover {
   width: 35px;
 }
 
-/* Fixed total bar */
+/* TOTAL BAR */
 .total-bar {
   position: fixed;
   bottom: 0;
@@ -120,8 +123,6 @@ button:hover, .btn:hover {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-weight: bold;
-  box-shadow: 0 -3px 10px rgba(0,0,0,0.15);
 }
 </style>
 </head>
@@ -152,8 +153,7 @@ Call Now
 
 <h3>Featured Bedsheets</h3>
 
-<img id="slide"
-src="images/photo1.jpg">
+<img id="slide" src="images/photo1.jpg">
 
 </div>
 
@@ -169,7 +169,7 @@ src="images/photo1.jpg">
 <p>GH₵170</p>
 
 Quantity:
-<input type="number" id="qtyKing" value="0">
+<input type="number" id="qtyKing" value="0" min="0">
 
 </div>
 
@@ -182,7 +182,7 @@ Quantity:
 <p>GH₵170</p>
 
 Quantity:
-<input type="number" id="qtyQueen" value="0">
+<input type="number" id="qtyQueen" value="0" min="0">
 
 </div>
 
@@ -195,7 +195,7 @@ Quantity:
 <p>GH₵140</p>
 
 Quantity:
-<input type="number" id="qtyDouble" value="0">
+<input type="number" id="qtyDouble" value="0" min="0">
 
 </div>
 
@@ -205,11 +205,13 @@ Quantity:
 <h3>Mobile Money Payment</h3>
 
 <p>
+
 MoMo Number:<br>
 233530467047<br><br>
 
 Name:<br>
 iambojarmedia enterprise
+
 </p>
 
 <!-- INLINE PAYMENT BUTTONS -->
@@ -219,8 +221,7 @@ iambojarmedia enterprise
 Pay with Mobile Money
 </button>
 
-<a href="https://wa.me/233598180870"
-class="btn">
+<a href="https://wa.me/233598180870" class="btn">
 Confirm Payment
 </a>
 
@@ -262,7 +263,7 @@ Send Order
 
 <script>
 
-/* SLIDESHOW */
+//// SLIDESHOW
 
 const images = [
 
@@ -278,7 +279,8 @@ let i = 0;
 
 setInterval(function(){
 
-let slide = document.getElementById("slide");
+let slide =
+document.getElementById("slide");
 
 slide.classList.add("fade-out");
 
@@ -299,7 +301,8 @@ slide.classList.remove("fade-out");
 },3000);
 
 
-/* UPDATE TOTAL */
+
+//// TOTAL
 
 function updateTotal(){
 
@@ -317,12 +320,14 @@ king*170 +
 queen*170 +
 double*140;
 
-document.getElementById("total").innerText = total;
+document.getElementById("total").innerText =
+total;
 
 }
 
 
-/* SEND ORDER */
+
+//// SEND ORDER
 
 function sendOrder(){
 
@@ -362,7 +367,8 @@ window.open(
 }
 
 
-/* PAYSTACK PAYMENT */
+
+//// PAYSTACK
 
 function openPaystackPopup(){
 
@@ -379,19 +385,26 @@ return;
 
 }
 
-let handler = PaystackPop.setup({
+let handler =
+PaystackPop.setup({
 
-key: "pk_test_3325b55720129b42a3f952a55e81a4049882265a",
+key:
+"pk_test_3325b55720129b42a3f952a55e81a4049882265a",
 
-email: "customer@email.com",
+email:
+"customer@email.com",
 
-amount: totalAmount * 100,
+amount:
+totalAmount * 100,
 
-currency: "GHS",
+currency:
+"GHS",
 
-ref: "BedSpreadGh_" + Date.now(),
+ref:
+"BedSpreadGh_" + Date.now(),
 
-callback: function(response){
+callback:
+function(response){
 
 alert("Payment successful!");
 
@@ -399,7 +412,8 @@ sendOrder();
 
 },
 
-onClose: function(){
+onClose:
+function(){
 
 console.log("Payment closed");
 
@@ -411,10 +425,24 @@ handler.openIframe();
 
 }
 
+
+
+//// AUTO TOTAL UPDATE (ADDED SAFE)
+
+document.getElementById("qtyKing")
+.addEventListener("input", updateTotal);
+
+document.getElementById("qtyQueen")
+.addEventListener("input", updateTotal);
+
+document.getElementById("qtyDouble")
+.addEventListener("input", updateTotal);
+
 </script>
 
 </body>
 </html>
+
 
 
 
