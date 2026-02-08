@@ -23,15 +23,18 @@ button, .btn {
   background: #25D366;
   color: white;
   border: none;
-  padding: 10px 15px;
+  padding: 12px 18px;
   border-radius: 8px;
   text-decoration: none;
   display: inline-block;
-  margin: 5px 3px;
+  margin: 5px;
   cursor: pointer;
   transition: transform 0.2s;
 }
-button:hover, .btn:hover { transform: translateY(-2px); }
+
+button:hover, .btn:hover {
+  transform: translateY(-2px);
+}
 
 .instagram { background: #E1306C; }
 .call { background: #1E90FF; }
@@ -50,7 +53,9 @@ button:hover, .btn:hover { transform: translateY(-2px); }
   transition: opacity 1s ease-in-out;
 }
 
-.fade-out { opacity: 0; }
+.fade-out {
+  opacity: 0;
+}
 
 .products {
   display: grid;
@@ -59,7 +64,9 @@ button:hover, .btn:hover { transform: translateY(-2px); }
 }
 
 @media(min-width:600px){
-  .products { grid-template-columns: repeat(3,1fr); }
+  .products {
+    grid-template-columns: repeat(3,1fr);
+  }
 }
 
 .product-card {
@@ -75,9 +82,23 @@ button:hover, .btn:hover { transform: translateY(-2px); }
   border-radius: 15px;
 }
 
+/* INLINE PAYMENT SECTION */
+#payment-buttons {
+  margin-top: 25px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  padding: 15px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+/* WhatsApp floating button */
 .whatsapp-float {
   position: fixed;
-  bottom: 20px;
+  bottom: 80px;
   right: 20px;
   background: #25D366;
   width: 60px;
@@ -86,165 +107,340 @@ button:hover, .btn:hover { transform: translateY(-2px); }
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000;
 }
 
-.whatsapp-float img { width: 35px; }
+.whatsapp-float img {
+  width: 35px;
+}
 
-/* Floating total bar */
+/* TOTAL BAR */
 .total-bar {
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
-  background: #fff;
+  background: white;
   border-top: 2px solid #25D366;
   padding: 10px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   box-shadow: 0 -4px 8px rgba(0,0,0,0.1);
-  z-index: 999;
-}
-
-.total-bar button { margin: 0 0 0 10px; }
-
-/* Inline payment buttons below products */
-#payment-buttons {
-  margin-top: 20px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-#payment-buttons button, #payment-buttons a {
-  padding: 10px 15px;
-  font-size: 16px;
 }
 </style>
+
 </head>
 <body>
 
 <header>
+
 <h1>BedSpreadGh</h1>
 <p>Affordable Quality Bedsheets</p>
 
-<a class="btn instagram" href="https://instagram.com/BedSpreadGh" target="_blank">Follow on Instagram</a>
-<a class="btn call" href="tel:+233598180870">Call Now</a>
+<a class="btn instagram"
+href="https://instagram.com/BedSpreadGh"
+target="_blank">
+Follow on Instagram
+</a>
+
+<a class="btn call"
+href="tel:+233598180870">
+Call Now
+</a>
+
 </header>
 
 <div class="container">
 
 <!-- SLIDESHOW -->
+
 <div class="slideshow">
+
 <h3>Featured Bedsheets</h3>
-<img id="slide" src="images/photo1.jpg">
+
+<img id="slide"
+src="images/photo1.jpg">
+
 </div>
 
 <!-- PRODUCTS -->
+
 <div class="products">
+
 <div class="product-card">
+
 <img src="images/king-bedsheet.jpg">
+
 <h3>King Bedsheet</h3>
+
 <p>GH₵170</p>
-Quantity: <input type="number" id="qtyKing" value="0">
+
+Quantity:
+
+<input type="number"
+id="qtyKing"
+value="0">
+
 </div>
 
 <div class="product-card">
+
 <img src="images/photo2.jpg">
+
 <h3>Queen Bedsheet</h3>
+
 <p>GH₵170</p>
-Quantity: <input type="number" id="qtyQueen" value="0">
+
+Quantity:
+
+<input type="number"
+id="qtyQueen"
+value="0">
+
 </div>
 
 <div class="product-card">
+
 <img src="images/photo3.jpg">
+
 <h3>Double Bedsheet</h3>
+
 <p>GH₵140</p>
-Quantity: <input type="number" id="qtyDouble" value="0">
+
+Quantity:
+
+<input type="number"
+id="qtyDouble"
+value="0">
+
 </div>
+
 </div>
 
 <!-- PAYMENT INFO -->
+
 <h3>Mobile Money Payment</h3>
+
 <p>
-MoMo Number:<br>233530467047<br><br>
-Name:<br>iambojarmedia enterprise
+
+MoMo Number:<br>
+233530467047<br><br>
+
+Name:<br>
+iambojarmedia enterprise
+
 </p>
 
-<!-- INLINE PAYMENT BUTTONS -->
+<!-- INLINE BUTTONS -->
+
 <div id="payment-buttons">
-<button onclick="openPaystackPopup()">Pay with Mobile Money</button>
-<a href="https://wa.me/233598180870" class="btn">Confirm Payment</a>
-</div>
 
-</div>
+<button onclick="openPaystackPopup()">
+Pay with Mobile Money
+</button>
 
-<!-- FLOAT BUTTON -->
-<a href="https://wa.me/233598180870" class="whatsapp-float">
-<img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg">
+<a href="https://wa.me/233598180870"
+class="btn">
+Confirm Payment
 </a>
 
-<!-- FLOAT TOTAL BAR -->
-<div class="total-bar">
-<div>Total: GH₵ <span id="total">0</span></div>
-<div>
-<button onclick="updateTotal()">Update Total</button>
-<button onclick="sendOrder()">Send Order</button>
 </div>
+
+</div>
+
+<!-- FLOAT WHATSAPP -->
+
+<a href="https://wa.me/233598180870"
+class="whatsapp-float">
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg">
+
+</a>
+
+<!-- TOTAL BAR -->
+
+<div class="total-bar">
+
+<div>
+Total: GH₵
+<span id="total">0</span>
+</div>
+
+<div>
+
+<button onclick="updateTotal()">
+Update Total
+</button>
+
+<button onclick="sendOrder()">
+Send Order
+</button>
+
+</div>
+
 </div>
 
 <!-- PAYSTACK -->
+
 <script src="https://js.paystack.co/v1/inline.js"></script>
+
 <script>
-//// SLIDESHOW
-const images = ["images/photo1.jpg","images/photo2.jpg","images/photo3.jpg","images/photo4.jpg","images/photo5.jpg"];
+
+/* SLIDESHOW */
+
+const images = [
+
+"images/photo1.jpg",
+"images/photo2.jpg",
+"images/photo3.jpg",
+"images/photo4.jpg",
+"images/photo5.jpg"
+
+];
+
 let i = 0;
+
 setInterval(function(){
-  let slide = document.getElementById("slide");
-  slide.classList.add("fade-out");
-  setTimeout(function(){
-    i++; if(i>=images.length){i=0;}
-    slide.src = images[i];
-    slide.classList.remove("fade-out");
-  },500);
+
+let slide =
+document.getElementById("slide");
+
+slide.classList.add("fade-out");
+
+setTimeout(function(){
+
+i++;
+
+if(i >= images.length){
+i = 0;
+}
+
+slide.src = images[i];
+
+slide.classList.remove("fade-out");
+
+},500);
+
 },3000);
 
-//// TOTAL
+
+/* TOTAL */
+
 function updateTotal(){
-  let king = parseInt(document.getElementById("qtyKing").value)||0;
-  let queen = parseInt(document.getElementById("qtyQueen").value)||0;
-  let double = parseInt(document.getElementById("qtyDouble").value)||0;
-  let total = king*170 + queen*170 + double*140;
-  document.getElementById("total").innerText = total;
+
+let king =
+parseInt(document.getElementById("qtyKing").value) || 0;
+
+let queen =
+parseInt(document.getElementById("qtyQueen").value) || 0;
+
+let double =
+parseInt(document.getElementById("qtyDouble").value) || 0;
+
+let total =
+king*170 +
+queen*170 +
+double*140;
+
+document.getElementById("total").innerText = total;
+
 }
 
-//// SEND ORDER
+
+/* WHATSAPP ORDER */
+
 function sendOrder(){
-  let king = parseInt(document.getElementById("qtyKing").value)||0;
-  let queen = parseInt(document.getElementById("qtyQueen").value)||0;
-  let double = parseInt(document.getElementById("qtyDouble").value)||0;
-  let total = king*170 + queen*170 + double*140;
-  if(total === 0){ alert("Select quantity first"); return; }
-  let msg = "New Order:%0A"+"King: "+king+"%0A"+"Queen: "+queen+"%0A"+"Double: "+double+"%0A"+"Total: GH₵"+total;
-  window.open("https://wa.me/233598180870?text="+msg);
+
+let king =
+parseInt(document.getElementById("qtyKing").value) || 0;
+
+let queen =
+parseInt(document.getElementById("qtyQueen").value) || 0;
+
+let double =
+parseInt(document.getElementById("qtyDouble").value) || 0;
+
+let total =
+king*170 +
+queen*170 +
+double*140;
+
+if(total === 0){
+alert("Select quantity first");
+return;
 }
 
-//// PAYSTACK POPUP
-function openPaystackPopup(){
-  let totalAmount = parseFloat(document.getElementById("total").innerText)||0;
-  if(totalAmount<=0){ alert("Please select items first"); return; }
-  let handler = PaystackPop.setup({
-    key: "pk_test_3325b55720129b42a3f952a55e81a4049882265a", // replace with your public key
-    email: "customer@email.com",
-    amount: totalAmount*100,
-    currency: "GHS",
-    ref: "BedSpreadGh_"+Date.now(),
-    callback: function(response){ alert("Payment successful!"); sendOrder(); },
-    onClose: function(){ console.log("Payment closed"); }
-  });
-  handler.openIframe();
+let msg =
+"New Order:%0A" +
+"King: " + king + "%0A" +
+"Queen: " + queen + "%0A" +
+"Double: " + double + "%0A" +
+"Total: GH₵" + total;
+
+window.open(
+"https://wa.me/233598180870?text=" + msg
+);
+
 }
+
+
+/* PAYSTACK */
+
+function openPaystackPopup(){
+
+let totalAmount =
+parseFloat(
+document.getElementById("total").innerText
+) || 0;
+
+if(totalAmount <= 0){
+
+alert("Please select items first");
+
+return;
+
+}
+
+let handler = PaystackPop.setup({
+
+key:
+"pk_test_3325b55720129b42a3f952a55e81a4049882265a",
+
+email:
+"customer@email.com",
+
+amount:
+totalAmount * 100,
+
+currency:
+"GHS",
+
+ref:
+"BedSpreadGh_" + Date.now(),
+
+callback: function(response){
+
+alert("Payment successful!");
+
+sendOrder();
+
+},
+
+onClose: function(){
+
+console.log("Payment closed");
+
+}
+
+});
+
+handler.openIframe();
+
+}
+
 </script>
+
 </body>
 </html>
+
 
