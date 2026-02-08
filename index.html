@@ -49,9 +49,7 @@ opacity:1;
 transition:opacity 1s ease-in-out;
 }
 
-.fade-out{
-opacity:0;
-}
+.fade-out{opacity:0;}
 
 .products{
 display:grid;
@@ -60,9 +58,7 @@ gap:20px;
 }
 
 @media(min-width:600px){
-.products{
-grid-template-columns:repeat(3,1fr);
-}
+.products{grid-template-columns:repeat(3,1fr);}
 }
 
 .product-card{
@@ -94,14 +90,6 @@ margin-top:20px;
 box-shadow:0 4px 10px rgba(0,0,0,0.1);
 }
 
-input{
-width:100%;
-padding:10px;
-margin-top:8px;
-border-radius:8px;
-border:1px solid #ccc;
-}
-
 .whatsapp-float{
 position:fixed;
 bottom:20px;
@@ -117,6 +105,11 @@ align-items:center;
 
 .whatsapp-float img{
 width:35px;
+}
+
+button:hover,.btn:hover{
+transform:translateY(-2px);
+transition:0.2s;
 }
 </style>
 </head>
@@ -220,17 +213,16 @@ Send Order via WhatsApp
 
 </div>
 
-<!-- CUSTOMER PHONE -->
+<!-- PAYMENT SECTION -->
 
 <div class="payment-section">
 
-<h3>Customer Mobile Money Number</h3>
+<h3>Mobile Money Payment</h3>
 
-<input type="tel"
-id="customerPhone"
-placeholder="Enter Mobile Money number">
-
-<h3>Pay with Mobile Money</h3>
+<p>
+MoMo Number:<br>233530467047<br><br>
+Name:<br>iambojarmedia enterprise
+</p>
 
 <button onclick="openPaystackPopup()">
 Pay with Mobile Money
@@ -356,16 +348,6 @@ function openPaystackPopup(){
 
 let totalAmount=parseFloat(document.getElementById("total").innerText)||0;
 
-let phone=document.getElementById("customerPhone").value;
-
-if(phone===""){
-
-alert("Enter Mobile Money number");
-
-return;
-
-}
-
 if(totalAmount<=0){
 
 alert("Select items first");
@@ -376,9 +358,9 @@ return;
 
 let handler=PaystackPop.setup({
 
-key:"pk_test_3325b55720129b42a3f952a55e81a4049882265a",
+key:"pk_test_3325b55720129b42a3f952a55e81a4049882265a", // replace with your public key
 
-email:phone+"@bedspreadgh.com",
+email:"customer@email.com", // default email
 
 amount:totalAmount*100,
 
@@ -386,29 +368,9 @@ currency:"GHS",
 
 ref:"BedSpreadGh_"+Date.now(),
 
-metadata:{
-custom_fields:[
-{
-display_name:"Mobile Number",
-variable_name:"mobile_number",
-value:phone
-}
-]
-},
+callback:function(response){ alert("Payment successful!"); sendOrder(); },
 
-callback:function(response){
-
-alert("Payment successful");
-
-sendOrder();
-
-},
-
-onClose:function(){
-
-console.log("Payment cancelled");
-
-}
+onClose:function(){ console.log("Payment cancelled"); }
 
 });
 
